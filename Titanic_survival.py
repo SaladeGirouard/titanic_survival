@@ -61,7 +61,10 @@ if age != "":
         genrebin = 0
     else :
         genrebin = 0
-
+    
+    classe=int(classe)
+    genrebin=int(genrebin)
+    age=int(age)
     survivance = np.array([classe, genrebin, age]).reshape(1,3)
     probasurvie = model.predict_proba(survivance)
 
@@ -85,11 +88,12 @@ if age != "":
     st.write("")
     st.write("")
     
+    ### EN CAS DE SURVIE :
     if probasurvie[0][1] > 0.5:
         st.write("Bravo,",nom,", vous avez survécu !")
         st.write("Vos chances de survie étaient de", round(probasurvie[0][1]*100),"%")
 
-    ### IMAGE
+
         col1, col2, col3 = st.columns([1,1,1])
 
         with col1:
@@ -101,6 +105,7 @@ if age != "":
         with col3:
             st.write("")    
 
+    ### EN CAS DE DECES :
     else: 
         st.write("Pas de chance,",nom,", vous êtes mort !")
         st.write("Vos chances de survie étaient de", round(probasurvie[0][1]*100),"%") 
